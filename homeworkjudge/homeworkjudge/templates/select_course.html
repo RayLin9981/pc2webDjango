@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%block center%}
+<h2>請選擇課程：</h2>
+<form method="GET" action="../listHomework/">
+        <select name='course'>
+    {% for course in coursenamelist%}
+    <option value="{{course.courseId}}">{{course.courseName}}</option>
+    {%endfor%}
+        </select>
+    <input type="submit" value="確定">
+</form>
+{%endblock%}

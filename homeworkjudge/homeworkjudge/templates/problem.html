@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{%block center%}
+<p>選擇的問題為：{{problem.problemName}}</p>
+
+<form method="POST" action="{% url 'judge' problemId=problemId %}" enctype="multipart/form-data"> {%csrf_token%}
+    <p>使用語言：<select name="language">
+            <option value="java">java</option>
+        </select></p>
+    <p><input type="file" id='file' name='file' value="上傳檔案" required></p>
+    <p> <input type="submit" value="上傳"></p>
+
+</form>
+
+<a href="{% url 'selectCourse' %}">回首頁</a>
+<p style="color: red">{{errMessage}}</p>
+
+
+{%endblock%}

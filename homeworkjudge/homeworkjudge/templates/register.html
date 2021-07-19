@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block center %}
+<h1>註冊帳號</h1>
+<form method="POST"> {% csrf_token %}
+
+{{form.as_p}}
+<input type="submit" value="save">
+</form>
+{% endblock %}

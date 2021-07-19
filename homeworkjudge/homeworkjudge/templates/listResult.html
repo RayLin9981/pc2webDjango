@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block center %}
+<h1>問題清單</h1>
+<table style="margin: 0 auto;" border="1">
+    <thead>
+        <tr>
+            <td>編號</td>
+            <td>問題名稱</td>
+            <td>是否完成</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for problem,result in iterList %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{problem.problemName}}</td>
+            {%if result == "已通過" %}
+            <td style="color: green">{{result}}</td>
+
+            {% else%}
+            <td style="color: red">{{result}}</td>
+
+            {%endif%}
+
+
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+<a href="{% url 'selectCourse' %}">回首頁</a>
+
+
+{% endblock%}

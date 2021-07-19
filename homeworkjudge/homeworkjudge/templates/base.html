@@ -1,0 +1,107 @@
+<style type="text/css">
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+    #footer {
+        clear: both;
+        background-color: #FFD4D4;
+        height: 80px;
+        text-align: center;
+        line-height: 80px;
+    }
+
+    #div1 {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        height: 100%;
+
+    }
+
+    #div_left {
+        /* background-color: red; */
+        flex: 1;
+        font-size: 50px;
+    }
+
+    #div_center {
+        background-color: skyblue;
+        width: 80%;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+
+    }
+
+    #div_right {
+        /* background-color: skyblue; */
+        flex: 1
+    }
+    nav {
+        /* position:fixed; */
+        width: 100%;
+    }
+    nav a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        font-size: 2em;
+    }
+
+    nav a:hover {
+        background-color: rgb(115, 115, 115);
+        color: white;
+    }
+
+    nav>ul {
+        list-style: none;
+        background-color: aquamarine;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ul-class {
+        display: flex;
+        justify-content: flex-end;
+
+    }
+    table {
+        width:80%;
+
+    }
+</style>
+<!DOCTYPE html>
+
+<head>
+
+    <title>作業上傳系統</title>
+
+<body>
+    <div style="height:100%">
+        <div>
+            <nav>
+                <ul class='ul-class'>
+                    <li><a>{{request.session.name}}</a></li>
+                    <li><a href="{% url 'selectCourse' %}">回首頁</a></li>
+                    <li><a href="{% url 'logout'%}">登出</a></li>
+                  <!-- <li><a href="{% url 'register'%}">註冊</a></li>--> 
+                </ul>
+            </nav>
+        </div>
+        <div id="div1">
+
+            <div id="div_left">{% block left%}這是右邊的空白{% endblock %}</div>
+            <div id="div_center"><a>{%block center%}center{%endblock%}</a></div>
+            <div id="div_right">{% block right%}這是左邊的空白{%endblock%}</div>
+        </div>
+
+    </div>
+
+</body>
+</head>
+
+</html>

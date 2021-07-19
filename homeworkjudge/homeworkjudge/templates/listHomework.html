@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+
+{%block center%}
+<h1>作業清單</h1>
+<h3>現在時間：{{timeNow}}</h3>
+<table style="margin: 0 auto;" border="1px" >
+    <thead>
+        <tr>
+            <td>作業名稱</td>
+            <td>開始時間</td>
+            <td>結束時間</td>
+            <td>繳交</td>
+            <td>查看繳交情況</td>
+            <td>附件</td>
+        </tr>
+    </thead>
+    <tbody>
+            {%for x in obj%}
+        <tr>
+            <td>{{x.title}}</td>
+            <td>{{x.startDateTime}}</td>
+            <td>{{x.endDateTime}}</td>
+            {%if x.endDateTime >= timeNow%}
+            <td><a href="/listProblem/{{x.homeworkId}}">前往</a></td>
+            {%else%}
+            <td>已超過繳交時間！</td>
+            {% endif %}
+            <td><a href={% url 'listResult' homeworkId=x.homeworkId %}>查看</a></td>
+            {%if x.attachment%}
+            
+            <td><a href="{{x.attachment}}" download>下載</a> </td>
+            {%else%}
+            <td>無附件</td>
+            {% endif %}
+        </tr>
+        {% endfor%}
+        </tbody>
+   
+</table>
+<a href="{% url 'selectCourse' %}">回首頁</a>
+
+
+{%endblock%}
