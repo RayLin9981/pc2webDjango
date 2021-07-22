@@ -28,8 +28,8 @@ Alias /listHomework/homework_attachment /var/www/pc2webDjango/homeworkjudge/home
 #
 echo "export PIPENV_VENV_IN_PROJECT=1" >> /root/.bashrc
 echo "export WORKON_HOME=~/.venvs" >> /root/.bashrc
-exit
-sudo su -
+export PIPENV_VENV_IN_PROJECT=1
+export WORKON_HOME=~/.venvs
 cd /var/www
 git clone https://github.com/RayLin9981/pc2webDjango
 cd pc2webDjango
