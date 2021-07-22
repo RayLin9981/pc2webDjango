@@ -36,9 +36,11 @@ def login_view(request,errorMessage=""):
         except:
             studentObj= ""
             errorMessage = "此帳號不存在"  
+        passwordCheck = False 
         if(studentObj):
             studentPassword = studentObj.password
             if(studentPassword == password):
+                passwordCheck = True
                 request.session['id'] = id
                 request.session['name'] = studentObj.studentName
                 request.session.set_expiry(7200) # 兩小時後登出
@@ -46,8 +48,10 @@ def login_view(request,errorMessage=""):
             else:
                 errorMessage="密碼錯誤"
                 print("密碼錯誤")
-        if(request.session.get('id')):
-            return redirect('selectCourse')
+            if(studentObj.isFirstLogin and passwordCheck):
+                return redirect('changePassword')
+            if(request.session.get('id')):
+                return redirect('selectCourse')
     content = {
         'errorMessage' : errorMessage,
     }
@@ -60,11 +64,15 @@ def change_password_view(request,errorMessage=""):
             return redirect('login')
     except KeyError:
         return redirect('login')
+    studentObj = Student.objects.get(studentId=request.session.get('id'))
+    if(studentObj.isFirstLogin):
+        errorMessage = "首次登入請修改密碼"
     if(request.POST):
-        if (request.POST['password']== request.POST['passwordCheck']):
+        if (request.POST['password']== request.POST['passwordCheck'] and request.POST['password']):
        
-            studentObj = Student.objects.get(studentId=request.session.get('id'))
+            
             studentObj.password = request.POST['password']
+            studentObj.isFirstLogin = False
             studentObj.save()
             return redirect('selectCourse')
         else:
@@ -84,6 +92,8 @@ def select_course_view(request):
     id = request.session.get('id')
     name = request.session.get('name')
     studentObj = Student.objects.get(studentId=id)
+    if(studentObj.isFirstLogin):
+            return redirect('changePassword')
     courselist = list(Course_Student.objects.filter(student_id=id))
     coursenamelist = []
     for i in courselist:
