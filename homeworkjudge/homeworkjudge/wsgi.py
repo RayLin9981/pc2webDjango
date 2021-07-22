@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
 
 import os
 import sys
-ssys.path.append('/var/www/pc2webDjango/.venv/lib/python3.6/site-packages')
+sys.path.append('/var/www/pc2webDjango/.venv/lib/python3.6/site-packages')
 sys.path.insert(0,'/var/www/pc2webDjango/.venv/lib/python3.6/site-packages')
 sys.path.append('/var/www/pc2webDjango/homeworkjudge')
 from django.core.wsgi import get_wsgi_application
