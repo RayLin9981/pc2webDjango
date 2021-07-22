@@ -1,0 +1,46 @@
+#!/bin/bash
+sudo su - 
+yum update -y
+yum install -y httpd python3 wget httpd-devel python3-devel python-devel java-1.8.0-openjdk-devel.x86_64
+yum groupinstall "Development Tools" -y
+pip3 install pipenv
+#
+cd /opt
+wget https://github.com/GrahamDumpleton/mod_wsgi/archive/4.7.1.tar.gz
+tar xvf 4.7.1.tar.gz
+cd mod_wsgi-4.7.1/
+./configure --with-python=/usr/bin/python3
+make && make install
+#
+sed -i '1i\LoadModule wsgi_module modules/mod_wsgi.so' /etc/httpd/conf/httpd.conf
+#
+echo "WSGIScriptAlias / /var/www/pc2webDjango/homeworkjudge/homeworkjudge/wsgi.py
+WSGIDaemonProcess homeworkjudge home=/var/www/pc2webDjango/homeworkjudge python-path=/var/www/pc2webDjango:/var/www/pc2webDjango/.venv/lib/python3.6/site-packages
+WSGIPythonHome /var/www/pc2webDjango/.venv
+Alias /static /var/www/pc2webDjango/homeworkjudge/static
+Alias /listHomework/homework_attachment /var/www/pc2webDjango/homeworkjudge/homework_attachment
+<Directory /var/www/pc2webDjango/homeworkjudge/homeworkjudge>
+  Options Indexes
+  <Files wsgi.py>
+    Require all granted
+  </Files>
+</Directory>" > /etc/httpd/conf.d/django.conf
+#
+echo "export PIPENV_VENV_IN_PROJECT=1" >> /root/.bashrc
+echo "export WORKON_HOME=~/.venvs" >> /root/.bashrc
+exit
+sudo su -
+cd /var/www
+git clone https://github.com/RayLin9981/pc2webDjango
+cd pc2webDjango
+pipenv install
+chown -R apache:apache /var/www/pc2webDjango/
+#
+cd /usr/lib64/python3.6/encodings/
+mv ascii.py ascii.py_bak
+cp utf_8.py ascii.py
+#
+apachectl stop
+apachectl start
+systemctl enable httpd
+systemctl restart httpd
