@@ -44,3 +44,9 @@ apachectl stop
 apachectl start
 systemctl enable httpd
 systemctl restart httpd
+#
+cd/var/www/pc2webDjango/homeworkjudge
+. /var/www/pc2webDjango/.venv/bin/activate
+python /var/www/pc2webDjango/homeworkjudge/manage.py migrate
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin1', 'admin@myproject.com', 'password')" | python /var/www/pc2webDjango/homeworkjudge/manage.py shell
+chown -R apache:apache /var/www/pc2webDjango/
