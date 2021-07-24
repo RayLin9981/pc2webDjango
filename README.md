@@ -27,7 +27,7 @@
 
 ## 主視覺
 
-![pc2webDjango%20md%201166906c26f5424ea34740e05e09b164/%E6%88%AA%E5%9C%96_2021-07-25_%E4%B8%8A%E5%8D%881.03.04.png](pc2webDjango%20md%201166906c26f5424ea34740e05e09b164/%E6%88%AA%E5%9C%96_2021-07-25_%E4%B8%8A%E5%8D%881.03.04.png)
+![image/view1.png](image/view1.png)
 
 ---
 
