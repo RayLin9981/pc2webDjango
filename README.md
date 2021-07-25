@@ -28,7 +28,7 @@
 ## 主視覺
 
 ![image/view1.png](image/view1.png)
-![image/gifview.gif](image/gifview.gif)
+![image/gifview1.gif](image/gifview1.gif)
 
 ---
 
